@@ -1,0 +1,42 @@
+<div class="web-content">
+  <aside>
+    <div class="sidebar-header">
+      <h1><a href="https://github.com/DasShorty/pinga" style="color: aqua; text-decoration: none"
+             target="_blank">Pinga</a> by</h1>
+      <img priority class="sidebar-image" ngSrc="/images/web-logo.svg" alt="DasShorty Website Logo" width="869"
+           height="81">
+      <hr>
+    </div>
+
+    <div class="uptime-services">
+      @for (service of serviceService.data; track service.id) {
+        <div class="uptime-service">
+          <div class="service-data">
+            <div class="service-icon" [style.background-color]="service.hexColor">
+              <p>{{ service.shortName }}</p>
+            </div>
+            <div class="service-container">
+              <h4>{{ service.serviceName }}</h4>
+              <p class="service-url">{{ service.requestUri }}</p>
+            </div>
+          </div>
+          <div class="service-last-status">
+            @if (statusMap.get(service.id)) {
+              <div class="service-last-status-dot-y">
+              </div>
+            } @else {
+              <div class="service-last-status-dot-n">
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+  </aside>
+  <div class="side-content">
+    <ng-content>
+
+    </ng-content>
+  </div>
+</div>

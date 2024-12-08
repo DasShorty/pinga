@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../public/fonts/Inter.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter-Italic';
+  src: url('../public/fonts/Inter-italic.ttf') format('truetype');
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
