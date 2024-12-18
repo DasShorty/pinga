@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
-import {ServiceService, ServiceStatus} from '../service/service.service';
+import {ServiceService, ServiceStatusEnum} from '../service/service.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,12 +17,28 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     setInterval(() => {
-      this.serviceService.data.forEach(value => {
-        this.isServiceUp(value.id).then(statusReport => {
-          this.statusMap.set(value.id, statusReport);
-        });
+      this.takeRequest();
+    }, 10000);
+  }
+
+  protected getStatus(serviceId: string): ServiceStatusEnum {
+    if (!this.statusMap.has(serviceId)) {
+      return ServiceStatusEnum.UNKNOWN;
+    }
+
+    if (this.statusMap.get(serviceId)) {
+      return ServiceStatusEnum.UP;
+    } else {
+      return ServiceStatusEnum.DOWN;
+    }
+  }
+
+  private takeRequest() {
+    this.serviceService.data.forEach(value => {
+      this.isServiceUp(value.id).then(statusReport => {
+        this.statusMap.set(value.id, statusReport);
       });
-    }, 1000);
+    });
   }
 
   constructor(protected serviceService: ServiceService) {
@@ -35,8 +51,11 @@ export class SidebarComponent implements OnInit {
         return false;
       }
 
-      return value.body.responseCode === 200;
+      let body = value.body;
+
+      return body.responseCode === body.service.expectedStatusCode;
     });
   }
 
+  protected readonly ServiceStatusEnum = ServiceStatusEnum;
 }

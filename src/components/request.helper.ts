@@ -14,9 +14,7 @@ export class RequestHelper {
 
   _backendUrl = "http://localhost:8080";
   _httpHeaders = {
-    Authorization: `Bearer token`,
-    Accept: '*',
-    "Access-Control-Allow-Origin": '*'
+    Authorization: `Bearer token`
   }
 
   constructor(private httpClient: HttpClient) {

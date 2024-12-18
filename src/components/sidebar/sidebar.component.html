@@ -21,12 +21,22 @@
             </div>
           </div>
           <div class="service-last-status">
-            @if (statusMap.get(service.id)) {
-              <div class="service-last-status-dot-y">
-              </div>
-            } @else {
-              <div class="service-last-status-dot-n">
-              </div>
+            @switch (getStatus(service.id)) {
+              @case (ServiceStatusEnum.UP) {
+                <div class="service-last-status-dot-n">
+                  <div class="service-last-status-dot-n heart-animation">
+                  </div>
+                </div>
+              }
+              @case (ServiceStatusEnum.DOWN) {
+                <div class="service-last-status-dot-y">
+                  <div class="service-last-status-dot-y heart-animation">
+                  </div>
+                </div>
+              }
+              @default {
+                <div class="loading-spinner"></div>
+              }
             }
           </div>
         </div>

@@ -19,6 +19,12 @@ export type ServiceStatus = {
   responseMessage: string
 }
 
+export enum ServiceStatusEnum {
+  UP,
+  DOWN,
+  UNKNOWN
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,7 +54,7 @@ export class ServiceService extends BehaviorSubject<Service[]> {
   }
 
   async getLastStatusFromService(id: string) {
-    return this.requestHelper.get<ServiceStatus>(`/service/${id}`);
+    return this.requestHelper.get<ServiceStatus>(`/status/${id}`);
   }
 
 }
