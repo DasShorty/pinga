@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
 import {ServiceService, ServiceStatusEnum} from '../service/service.service';
+import {AddServiceComponent} from '../addservice/addservice.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   templateUrl: `sidebar.component.html`,
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
+    AddServiceComponent
   ],
   styleUrl: `sidebar.component.css`
 })
@@ -58,4 +60,9 @@ export class SidebarComponent implements OnInit {
   }
 
   protected readonly ServiceStatusEnum = ServiceStatusEnum;
+
+  openAddService() {
+    console.log("Add service event emitted");
+    this.serviceService.addService.emit(true);
+  }
 }

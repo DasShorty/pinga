@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {EventEmitter, Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {RequestHelper} from '../request.helper';
 
 export type Service = {
@@ -30,7 +30,8 @@ export enum ServiceStatusEnum {
 })
 export class ServiceService extends BehaviorSubject<Service[]> {
 
-  _data: Service[] = [];
+  private _data: Service[] = [];
+  private _addService = new EventEmitter<boolean>(false);
 
   constructor(private requestHelper: RequestHelper) {
     super([]);
@@ -39,6 +40,10 @@ export class ServiceService extends BehaviorSubject<Service[]> {
 
   get data() {
     return this._data;
+  }
+
+  get addService(): EventEmitter<boolean> {
+    return this._addService;
   }
 
   getServices() {

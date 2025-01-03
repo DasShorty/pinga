@@ -12,6 +12,9 @@
 }
 
 aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: sticky;
   width: 17rem;
   height: 100vh;
@@ -95,6 +98,8 @@ aside {
   height: 0.8rem;
   border-radius: 100%;
   background-color: #00FF00;
+  justify-content: center;
+  align-content: center;
 }
 
 .service-last-status-dot-n {
@@ -102,10 +107,16 @@ aside {
   height: 0.8rem;
   border-radius: 100%;
   background-color: red;
+  justify-content: center;
+  align-content: center;
 }
 
 .heart-animation {
   animation: heart ease-in-out 1s infinite;
+}
+
+.bottom-sidebar {
+  display: flex;
 }
 
 @keyframes heart {
@@ -132,4 +143,24 @@ aside {
   to {
     transform: rotate(360deg);
   }
+}
+
+.sidebar-bottom {
+  margin: 0.45rem 1rem;
+}
+
+.sidebar-bottom button {
+  width: 100%;
+  background: none;
+  border: 2px solid gray;
+  border-radius: 1rem;
+  color: white;
+  padding: 0.25rem;
+  transition: 0.3s;
+}
+
+.sidebar-bottom button:hover {
+  background: white;
+  color: black;
+  cursor: pointer;
 }
